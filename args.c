@@ -13,12 +13,15 @@ void   structs_create(t_arg s_args, t_arg *s_arg)
 
 void    arg_init(t_arg *s_arg)
 {
+    s_arg->control = 0;
+    s_arg->forks = 0;
     s_arg->index = 0;
     s_arg->must_eat = -1;
     s_arg->n_philos = 0;
     s_arg->time_die = 0;
     s_arg->time_eat = 0;
     s_arg->time_sleep = 0;
+    s_arg->time = 0;
 }
 
 int     str_convert(char *str)

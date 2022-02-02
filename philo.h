@@ -5,6 +5,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <sys/time.h>
+
+pthread_mutex_t lock;
 
 typedef struct  s_arg
 {
@@ -14,6 +17,10 @@ typedef struct  s_arg
     int time_sleep;
     int must_eat;
     int index;
+    int time;
+    int forks;
+    int control;
+    struct timeval s_iniTime;
 }               t_arg;
 
 void    arg_convert(t_arg *s_arg, int argc, char **argv);
