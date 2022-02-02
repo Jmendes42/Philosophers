@@ -14,11 +14,14 @@
 void    philo(t_arg s_args)
 {
     int         index;
+    int         forks[s_args.n_philos];
     t_arg       s_arg[s_args.n_philos];
     pthread_t   philos[s_args.n_philos - 1];
 
     gettimeofday(&s_args.s_iniTime, NULL);
     pthread_mutex_init(&lock, NULL);
+    memset(forks, 0, s_args.n_philos);
+    printf("%d\n", forks[2]);
     while (s_args.index < s_args.n_philos)
     {
         s_arg[s_args.index] = s_args;

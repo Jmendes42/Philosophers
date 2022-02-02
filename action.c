@@ -41,14 +41,16 @@ void    think(t_arg *s_arg)
 
 void    *action(void *s_args)
 {
-
     t_arg   *s_arg;
+    int     *forks;
 
     s_arg = (t_arg *)s_args;
+    forks = malloc(sizeof(int) * s_arg->n_philos);
     while (s_arg->must_eat != 0)
     {
         //printf("index == %d\n", s_arg->index);
         eat(s_arg);
+        forks[s_arg->index] = 0;
         sleeping(s_arg);
         think(s_arg);
         pthread_mutex_lock(&lock);

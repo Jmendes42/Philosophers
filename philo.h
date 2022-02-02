@@ -2,6 +2,7 @@
 # define PHILO_H
 
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -27,5 +28,7 @@ void    arg_convert(t_arg *s_arg, int argc, char **argv);
 void    arg_init(t_arg *s_arg);
 void    *action(void *s_args);
 int     error(char *str);
+
+//mandar o array de ints com os forks para a funcao action e fazer a verificacao com o nr de forks do anterior e o proximo
 
 #endif
