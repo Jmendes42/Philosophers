@@ -16,16 +16,16 @@ void    printer(char *str, t_arg * s_arg)
 {
     int time;
 
+    pthread_mutex_lock(&s_arg->lock);
     time = timer(s_arg->s_iniTime);
     printf("%d %d %s\n", time, s_arg->index, str);
+    pthread_mutex_unlock(&s_arg->lock);
 }
 
 void    eat(t_arg *s_arg)
 {
-    //pthread_mutex_lock(&lock);
     printer("eats", s_arg);
     sleep(s_arg->time_eat);
-    //pthread_mutex_unlock(&lock);
 }
 
 void    sleeping(t_arg *s_arg)
@@ -34,36 +34,30 @@ void    sleeping(t_arg *s_arg)
     sleep(s_arg->time_sleep);
 }
 
-void    think(t_arg *s_arg)
-{
-    printer("thinks", s_arg);
-}
-
 void    *action(void *s_args)
 {
     t_arg   *s_arg;
     int     *forks;
-
+    
     s_arg = (t_arg *)s_args;
     forks = malloc(sizeof(int) * s_arg->n_philos);
     while (s_arg->must_eat != 0)
     {
-        //printf("index == %d\n", s_arg->index);
+        if (s_arg->index > 0)
+            pthread_mutex_lock(&s_arg->forks[s_arg->index - 1]);
+        else
+            pthread_mutex_lock(&s_arg->forks[s_arg->n_philos - 1]);
+        pthread_mutex_lock(&s_arg->forks[s_arg->index]);
+        printer("picks forks", s_arg);
         eat(s_arg);
-        forks[s_arg->index] = 0;
+        pthread_mutex_unlock(&s_arg->forks[s_arg->index]);
+        if (s_arg->index > 0)
+            pthread_mutex_unlock(&s_arg->forks[s_arg->index - 1]);
+        else
+            pthread_mutex_unlock(&s_arg->forks[s_arg->n_philos - 1]);
         sleeping(s_arg);
-        think(s_arg);
-        pthread_mutex_lock(&lock);
-        printer("picks fork", s_arg);
-        s_arg->forks++;
-        pthread_mutex_unlock(&lock);
-        if (s_arg->control == 0)
-        {
-            s_arg->time = timer(s_arg->s_iniTime);
-            if (s_arg->time < s_arg->time_eat * s_arg->n_philos)
-                sleep(s_arg->time_eat * s_arg->n_philos - s_arg->time);
-            s_arg->control++;
-        }
+        printer("thinks", s_arg);
         s_arg->must_eat--;
     }
+    return (0);
 }
