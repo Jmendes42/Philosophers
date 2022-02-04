@@ -2,36 +2,35 @@
 
 double  timer(struct timeval s_iniTime)
 {
+    double  time_ret;
     struct timeval  s_time;
-    int  time_ret;
 
-    time_ret = 0;
     gettimeofday(&s_time, NULL);
-    time_ret = s_time.tv_sec - s_iniTime.tv_sec;
-    //time_ret = (s_time.tv_sec - s_iniTime.tv_sec) * 1000000 + (s_time.tv_usec - s_iniTime.tv_usec);
+    time_ret = (s_time.tv_sec - s_iniTime.tv_sec) * 1000.0;
+    time_ret += (s_time.tv_usec - s_iniTime.tv_usec) / 1000.0;
     return (time_ret);
 }
 
 void    printer(char *str, t_arg * s_arg)
 {
-    int time;
+    double time;
 
     pthread_mutex_lock(&s_arg->lock);
     time = timer(s_arg->s_iniTime);
-    printf("%d %d %s\n", time, s_arg->index, str);
+    printf("%.0f %d %s\n", time, s_arg->index, str);
     pthread_mutex_unlock(&s_arg->lock);
 }
 
 void    eat(t_arg *s_arg)
 {
     printer("eats", s_arg);
-    sleep(s_arg->time_eat);
+    usleep(s_arg->time_eat * 1000);
 }
 
 void    sleeping(t_arg *s_arg)
 {
     printer("sleeps", s_arg);
-    sleep(s_arg->time_sleep);
+    usleep(s_arg->time_sleep * 1000);
 }
 
 void    *action(void *s_args)
