@@ -1,16 +1,5 @@
 #include "philo.h"
 
-void   structs_create(t_arg s_args, t_arg *s_arg)
-{
-    s_arg->n_philos = s_args.n_philos;
-    s_arg->time_die = s_args.time_die;
-    s_arg->time_eat = s_args.time_eat;
-    s_arg->time_sleep = s_args.time_sleep;
-    s_arg->must_eat = s_args.must_eat;
-    s_arg->index = s_args.index;
-}
-
-
 void    arg_init(t_arg *s_arg)
 {
     s_arg->control = 0;
@@ -33,9 +22,9 @@ int     str_convert(char *str)
     result = 0;
     while (str[index])
     {
-        if (str[index] < 48 || str[index] > 57)
+        /*if (str[index] < 48 || str[index] > 57)
             error("Incorrect arguments");
-        else 
+        else */
             result = result * 10 + (str[index] - '0');
         index++;
     }
@@ -61,4 +50,5 @@ void    arg_convert(t_arg *s_arg, int argc, char **argv)
             s_arg->must_eat = str_convert(argv[index]);
         index++;
     }
+    s_arg->forks = malloc(sizeof(pthread_mutex_t) * s_arg->n_philos);
 }
