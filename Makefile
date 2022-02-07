@@ -21,6 +21,7 @@ SRC =	main.c\
 		action.c\
 		args.c\
 		time.c\
+		error.c\
 
 OBJS = $(SRC:.c=.o)
 

@@ -8,7 +8,11 @@
 #include <pthread.h>
 #include <sys/time.h>
 
-
+typedef struct  s_common
+{
+    pthread_mutex_t lock;
+    int             dead;
+}               t_common;
 
 typedef struct  s_arg
 {
@@ -20,10 +24,10 @@ typedef struct  s_arg
     int index;
     int time;
     int control;
-    pthread_mutex_t lock;
     pthread_mutex_t *forks;
     struct timeval  s_iniTime;
     struct timeval  to_die;
+    t_common *s_common;
 }               t_arg;
 
 //ARGS
@@ -37,6 +41,7 @@ void    *action(void *s_args);
 int     timer(struct timeval s_iniTime);
 int     time_to_die(struct timeval to_die, int time_die);
 
-//¡int     error(char *str);
+//ERROR
+int     error(char *str);
 
 #endif

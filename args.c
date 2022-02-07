@@ -11,6 +11,8 @@ void    arg_init(t_arg *s_arg)
     s_arg->time_eat = 0;
     s_arg->time_sleep = 0;
     s_arg->time = 0;
+    s_arg->s_common = malloc(sizeof(t_common));
+    s_arg->s_common->dead = 0;
 }
 
 int     str_convert(char *str)
@@ -22,9 +24,9 @@ int     str_convert(char *str)
     result = 0;
     while (str[index])
     {
-        /*if (str[index] < 48 || str[index] > 57)
+        if (str[index] < 48 || str[index] > 57)
             error("Incorrect arguments");
-        else */
+        else 
             result = result * 10 + (str[index] - '0');
         index++;
     }
