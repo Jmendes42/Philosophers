@@ -20,6 +20,7 @@ INCLUDE = philo.h
 SRC =	main.c\
 		action.c\
 		args.c\
+		time.c\
 
 OBJS = $(SRC:.c=.o)
 

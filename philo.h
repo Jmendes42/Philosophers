@@ -22,12 +22,21 @@ typedef struct  s_arg
     int control;
     pthread_mutex_t lock;
     pthread_mutex_t *forks;
-    struct timeval s_iniTime;
+    struct timeval  s_iniTime;
+    struct timeval  to_die;
 }               t_arg;
 
+//ARGS
 void    arg_convert(t_arg *s_arg, int argc, char **argv);
 void    arg_init(t_arg *s_arg);
+
+//ACTION
 void    *action(void *s_args);
+
+//TIME
+int     timer(struct timeval s_iniTime);
+int     time_to_die(struct timeval to_die, int time_die);
+
 //¡int     error(char *str);
 
 #endif
