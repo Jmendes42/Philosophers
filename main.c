@@ -40,7 +40,7 @@ int     main(int argc, char **argv)
 {
     t_arg   s_args;
 
-
+    memset(&s_args, 0, sizeof(s_args));
     if (argc < 5 || argc > 6)
             error("Wrong arguments number");
     arg_init(&s_args);

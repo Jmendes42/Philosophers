@@ -13,6 +13,8 @@ void    arg_init(t_arg *s_arg)
     s_arg->time = 0;
     s_arg->s_common = malloc(sizeof(t_common));
     s_arg->s_common->dead = 0;
+    gettimeofday(&s_arg->to_die_t, NULL);
+    gettimeofday(&s_arg->action_time, NULL);
 }
 
 int     str_convert(char *str)

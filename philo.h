@@ -26,8 +26,9 @@ typedef struct  s_arg
     int control;
     pthread_mutex_t *forks;
     struct timeval  s_iniTime;
-    struct timeval  to_die;
-    t_common *s_common;
+    struct timeval  to_die_t;
+    struct timeval  action_time;
+    t_common        *s_common;
 }               t_arg;
 
 //ARGS
@@ -36,6 +37,7 @@ void    arg_init(t_arg *s_arg);
 
 //ACTION
 void    *action(void *s_args);
+void    printer(char *str, t_arg * s_arg);
 
 //TIME
 int     timer(struct timeval s_iniTime);
