@@ -6,7 +6,7 @@
 /*   By: jmendes <jmendes@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:24:10 by jmendes           #+#    #+#             */
-/*   Updated: 2022/02/15 15:28:42 by jmendes          ###   ########.fr       */
+/*   Updated: 2022/02/15 16:13:17 by jmendes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,10 @@ void	philo(t_arg s_args)
 	t_arg		s_arg[200];
 	pthread_t	philos[200];
 
-	index = 0;
+	index = -1;
 	gettimeofday(&s_args.s_init_time, NULL);
-	while (index < s_args.n_philos)
-	{
+	while (++index < s_args.n_philos)
 		pthread_mutex_init(&s_args.forks[index], NULL);
-		index++;
-	}
 	pthread_mutex_init(&s_args.s_common->lock, NULL);
 	while (s_args.index < s_args.n_philos)
 	{
@@ -53,38 +50,44 @@ void	philo(t_arg s_args)
 			(void *)&s_arg[s_args.index]);
 		s_args.index++;
 	}
-	s_args.index = 0;
-	while (s_args.index < s_args.n_philos)
-	{
+	s_args.index = -1;
+	while (++s_args.index < s_args.n_philos)
 		pthread_join(philos[s_args.index], NULL);
-		s_args.index++;
-	}
-	index = 0;
-	while (index < s_args.n_philos)
-	{
+	index = -1;
+	while (++index < s_args.n_philos)
 		pthread_mutex_destroy(&s_args.forks[index]);
-		index++;
-	}
 	pthread_mutex_destroy(&s_args.s_common->lock);
+}
+
+int	edge_cases(int argc, t_arg s_args)
+{
+	if (argc < 5 || argc > 6)
+	{
+		error("Wrong arguments number");
+		return (1);
+	}
+	if (s_args.n_philos == 0)
+	{
+		error("No philosofers");
+		return (1);
+	}
+	if (s_args.n_philos == 1)
+	{
+		usleep(s_args.time_die * 1000);
+		printf("%d 0 has died\n", s_args.time_die);
+		return (1);
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_arg	s_args;
 
-	memset(&s_args, 0, sizeof(s_args));
-	if (argc < 5 || argc > 6)
-		error("Wrong arguments number");
 	arg_init(&s_args);
 	arg_convert(&s_args, argc, argv);
-	if (s_args.n_philos == 0)
-		error("No philosofers");
-	if (s_args.n_philos == 1)
-	{
-		usleep(s_args.time_die * 1000);
-		printf("%d 0 has died\n", s_args.time_die);
+	if (edge_cases(argc, s_args) == 1)
 		return (0);
-	}
 	philo(s_args);
 	free (s_args.s_common);
 	return (0);

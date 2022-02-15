@@ -6,18 +6,18 @@
 /*   By: jmendes <jmendes@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:24:02 by jmendes           #+#    #+#             */
-/*   Updated: 2022/02/14 18:24:03 by jmendes          ###   ########.fr       */
+/*   Updated: 2022/02/15 15:53:33 by jmendes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int     error(char *str)
+int	error(char *str)
 {
-    int index;
+	int	index;
 
-    index = 0;
-    printf("ERROR : %s\n", str);
-    exit(1);
-    return (1);
+	index = 0;
+	printf("ERROR : %s\n", str);
+	exit(1);
+	return (1);
 }
