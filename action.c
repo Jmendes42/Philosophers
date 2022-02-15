@@ -1,24 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmendes <jmendes@student.42lisboa.com>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 18:22:43 by jmendes           #+#    #+#             */
+/*   Updated: 2022/02/14 18:25:16 by jmendes          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-
-void    printer(char *str, t_arg * s_arg)
-{
-    int time;
-    pthread_mutex_t lock;
-    int static      control;
-
-    if (!control)
-        control = 0;
-    pthread_mutex_lock(&s_arg->s_common->lock);
-    time = timer(s_arg->s_iniTime);
-    if (s_arg->s_common->dead == 1 && control == 0)
-    {
-        printf("%d %d %s\n", time, s_arg->index, str);
-        control++;
-    }
-    if (s_arg->s_common->dead == 0)
-        printf("%d %d %s\n", time, s_arg->index, str);
-    pthread_mutex_unlock(&s_arg->s_common->lock);
-}
 
 int     to_die(t_arg *s_arg)
 {
