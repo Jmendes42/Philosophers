@@ -1,4 +1,4 @@
-# Philosofers
+# Philosophers
 
 #### A 42 school project about multithreading
 
