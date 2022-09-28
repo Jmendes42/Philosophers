@@ -6,11 +6,11 @@
 /*   By: jmendes <jmendes@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:22:43 by jmendes           #+#    #+#             */
-/*   Updated: 2022/02/15 16:01:20 by jmendes          ###   ########.fr       */
+/*   Updated: 2022/09/28 12:16:22 by jmendes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 int	to_die(t_arg *s_arg)
 {

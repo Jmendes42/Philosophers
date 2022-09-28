@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmendes <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: jmendes <jmendes@student.42lisboa.com>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/10 15:08:54 by jmendes           #+#    #+#              #
-#    Updated: 2021/10/18 11:04:46 by jmendes          ###   ########.fr        #
+#    Updated: 2022/09/28 12:15:07 by jmendes          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,7 @@ RM = rm -f
 NAME = philo
 INCLUDE = philo.h 
 
-SRC =	main.c\
-		action.c\
-		args.c\
-		time.c\
-		error.c\
+SRC = $(wildcard ./src/*.c)
 
 OBJS = $(SRC:.c=.o)
 

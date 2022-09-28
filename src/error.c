@@ -6,11 +6,11 @@
 /*   By: jmendes <jmendes@student.42lisboa.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 18:24:02 by jmendes           #+#    #+#             */
-/*   Updated: 2022/02/15 15:53:33 by jmendes          ###   ########.fr       */
+/*   Updated: 2022/09/28 12:16:44 by jmendes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../include/philo.h"
 
 int	error(char *str)
 {
